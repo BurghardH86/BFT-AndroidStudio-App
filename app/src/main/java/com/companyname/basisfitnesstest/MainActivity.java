@@ -1,5 +1,7 @@
 package com.companyname.basisfitnesstest;
 
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -11,21 +13,18 @@ import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 public class MainActivity extends AppCompatActivity {
 
     private Switch geschlechtSwitch = null;
     private TextView geschlechtTextView = null;
-    private TextView alterTextView;
-    private TextView sprintTextView;
-    private TextView klimmhangTextView;
+    private EditText alterEditText;
+    private EditText sprintEditText;
+    private EditText klimmhangEditText;
     private EditText laufEditText;
 
+    private boolean inputAlertTriggered;
+    private boolean genderSwitchIsChecked;
 
-    public void clickFunction(View view){
-
-    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +34,10 @@ public class MainActivity extends AppCompatActivity {
         initializeSwitch();
 
         initializeLaufEditText();
+
+        alterEditText = findViewById(R.id.alterEditText);
+        sprintEditText = findViewById(R.id.sprintEditText);
+        klimmhangEditText = findViewById(R.id.klimmhangEditText);
 
     }
 
@@ -48,10 +51,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) {
+                    genderSwitchIsChecked = geschlechtSwitch.isChecked();
                     geschlechtTextView.setText("Weiblich");  //To change the text near to switch
                     Log.d("You are :", "Checked");
                 }
                 else {
+                    genderSwitchIsChecked = geschlechtSwitch.isChecked();
                     geschlechtTextView.setText("Männlich");  //To change the text near to switch
                     Log.d("You are :", " Not Checked");
                 }
@@ -75,12 +80,9 @@ public class MainActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
                 String laufTimeString = s.toString();
-                if (IsAllDigits(laufTimeString))
+                if (!IsAllDigits(laufTimeString))
                 {
-                    Log.i("TextChanged", "Ein Zeichen eingegeben: " + laufTimeString);
-                }
-                else{
-                    //TODO: Display Alert if there is a not allowed character.
+                    laufTimeEnteredAlert();
                 }
             }
 
@@ -89,6 +91,19 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void laufTimeEnteredAlert() {
+        AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+        alertDialog.setTitle("Achtung");
+        alertDialog.setMessage("Es dürfen nur Zahlen und ':' eingegeben werden!");
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
     }
 
     public boolean IsAllDigits(String inputString)
@@ -106,6 +121,20 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         return true;
+    }
+
+    public void clickFunction(View view){
+        inputAlertTriggered = false;
+        int alter = Integer.parseInt(alterEditText.getText().toString());
+        double sprintTime = Double.parseDouble(sprintEditText.getText().toString());
+        double klimmhangTime = Double.parseDouble(klimmhangEditText.getText().toString());
+        double laufTime = Double.parseDouble(laufEditText.getText().toString());
+        //BFTErgebnisBerechnung Auswertung = new BFTErgebnisBerechnung(genderSwitchIsChecked, alter, sprintTime, klimmhangTime, laufTime);
+        if (!inputAlertTriggered)
+        {
+            //await Navigation.PushAsync(new ViewResult(Auswertung));
+        }
+
     }
 
 
