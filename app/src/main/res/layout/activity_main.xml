@@ -30,8 +30,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_margin="8dp"
+            android:checked="false"
             android:gravity="center_horizontal"
-            app:layout_constraintTop_toBottomOf="@+id/geschlechtTextView" />
+            app:layout_constraintTop_toBottomOf="@+id/geschlechtTextView"
+            tools:checked="false" />
 
         <TextView
             android:id="@+id/männlichWeiblichTextView"
@@ -54,6 +56,23 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/männlichWeiblichTextView" />
 
+        <!--<SeekBar-->
+            <!--android:id="@+id/alterSeekBar"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="8dp"-->
+            <!--android:max="65"-->
+            <!--android:progress="16" />-->
+
+        <EditText
+            android:id="@+id/alterEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:ems="10"
+            android:hint="Alter in Jahren"
+            android:inputType="number"
+            android:text="" />
         <TextView
             android:id="@+id/sprintTextView"
             android:layout_width="wrap_content"
@@ -68,7 +87,7 @@
             android:layout_margin="8dp"
             android:ems="10"
             android:hint="Zeit in Sekunden (s)"
-            android:inputType="textPersonName"
+            android:inputType="number"
             android:text="" />
 
         <TextView
@@ -85,7 +104,7 @@
             android:layout_margin="8dp"
             android:ems="10"
             android:hint="Zeit in Sekunden (s)"
-            android:inputType="textPersonName"
+            android:inputType="number"
             android:text="" />
 
         <TextView
@@ -102,7 +121,7 @@
             android:layout_margin="8dp"
             android:ems="10"
             android:hint="Zeit in Minuten:Sekunden (mm:ss)"
-            android:inputType="textPersonName"
+            android:inputType="text"
             android:text="" />
 
         <Button
