@@ -34,7 +34,8 @@ public class MainActivity extends AppCompatActivity {
         initializeGeschlechtTextView();
         initializeSwitch();
 
-        laufEditText = findViewById(R.id.laufEditText);
+        initializeLaufEditText();
+
     }
 
     private void initializeGeschlechtTextView() {
@@ -58,6 +59,11 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void initializeLaufEditText() {
+        laufEditText = findViewById(R.id.laufEditText);
+        laufTimeEntered();
+    }
+
     public void laufTimeEntered(){
         laufEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -68,6 +74,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
+                String laufTimeString = s.toString();
+                if (IsAllDigits(laufTimeString))
+                {
+                    Log.i("TextChanged", "Ein Zeichen eingegeben: " + laufTimeString);
+                }
+                else{
+                    //TODO: Display Alert if there is a not allowed character.
+                }
             }
 
             @Override
@@ -75,6 +89,23 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    public boolean IsAllDigits(String inputString)
+    {
+        for (int i=1; i<inputString.length(); i++)
+        {
+            /*Log.i("Schleife", "Postiton: " + i);
+            Log.i("Schleife", "Länge: " + inputString.length());*/
+            if (!(true == Character.isDigit(inputString.charAt(i))))
+            {
+                if (!(inputString.charAt(i) == ':'))
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
 
