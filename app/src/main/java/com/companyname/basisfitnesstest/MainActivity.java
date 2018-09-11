@@ -16,62 +16,103 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Switch geschlechtSwitch = null;
-    private TextView geschlechtTextView = null;
-    private EditText alterEditText;
+    private Switch genderSwitch = null;
+    private TextView genderTextView = null;
+    private EditText ageEditText;
     private EditText sprintEditText;
-    private EditText klimmhangEditText;
-    private EditText laufEditText;
+    private EditText pullUpEditText;
+    private EditText runEditText;
+
+    private boolean genderSwitchIsChecked = false;
+    private int age = 0;
+    private double sprintTime = 0.0;
+    private double pullUpTime = 0.0;
+    private double runTime = 0.0;
 
     private boolean inputAlertTriggered;
-    private boolean genderSwitchIsChecked;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        initializeGeschlechtTextView();
-        initializeSwitch();
-
-        initializeLaufEditText();
-
-        alterEditText = findViewById(R.id.alterEditText);
-        sprintEditText = findViewById(R.id.sprintEditText);
-        klimmhangEditText = findViewById(R.id.klimmhangEditText);
-
-    }
-
-    private void initializeGeschlechtTextView() {
-        geschlechtTextView = findViewById(R.id.männlichWeiblichTextView);
     }
 
     private void initializeSwitch() {
-        geschlechtSwitch = (Switch)findViewById(R.id.geschlechtSwitch);
-        geschlechtSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        genderTextView = findViewById(R.id.männlichWeiblichTextView);
+        genderSwitch = findViewById(R.id.geschlechtSwitch);
+        genderSwitchIsChecked = genderSwitch.isChecked();
+        genderSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) {
-                    genderSwitchIsChecked = geschlechtSwitch.isChecked();
-                    geschlechtTextView.setText("Weiblich");  //To change the text near to switch
+                    genderSwitchIsChecked = genderSwitch.isChecked();
+                    genderTextView.setText("Weiblich");  //To change the text near to switch
                     Log.d("You are :", "Checked");
                 }
                 else {
-                    genderSwitchIsChecked = !geschlechtSwitch.isChecked();
-                    geschlechtTextView.setText("Männlich");  //To change the text near to switch
+                    genderSwitchIsChecked = !genderSwitch.isChecked();
+                    genderTextView.setText("Männlich");  //To change the text near to switch
                     Log.d("You are :", " Not Checked");
                 }
             }
         });
     }
 
-    private void initializeLaufEditText() {
-        laufEditText = findViewById(R.id.laufEditText);
-        laufTimeEntered();
+    private void initializeAgeEditText(){
+        ageEditText = findViewById(R.id.alterEditText);
+        checkForValidAge();
     }
 
-    public void laufTimeEntered(){
-        laufEditText.addTextChangedListener(new TextWatcher() {
+    private void checkForValidAge(){
+        age = Integer.parseInt(ageEditText.getText().toString());
+        if (age < 16 || age > 65)
+        {
+            ageEditText.setBackgroundColor(Color.RED);
+            displayWrongAgeAlert();
+        }
+        else
+        {
+            ageEditText.setBackgroundColor(Color.TRANSPARENT);
+        }
+    }
+
+    private void initializeSprintEditText(){
+        sprintEditText = findViewById(R.id.sprintEditText);
+        sprintTime = checkForValidSprintTime();
+    }
+
+    private double checkForValidSprintTime(){
+        double validTime = checkForValidTime(sprintEditText);
+        if (validTime <= 0)
+        {
+            sprintEditText.setBackgroundColor(Color.RED);
+            displayMinTimeInputAlert();
+        }
+        return validTime;
+    }
+
+    private void initializePullUpEditText(){
+        pullUpEditText = findViewById(R.id.klimmhangEditText);
+        pullUpTime = checkForValidPullUpTime();
+    }
+
+    private double checkForValidPullUpTime(){
+        double validTime = checkForValidTime(pullUpEditText);
+        if (validTime < 0.0)
+        {
+            sprintEditText.setBackgroundColor(Color.RED);
+            displayMinTimeInputAlert();
+        }
+        return validTime;
+    }
+
+    private void initializeRunEditText() {
+        runEditText = findViewById(R.id.laufEditText);
+        checkForValidRunTime();
+    }
+
+    private void checkForValidRunTime(){
+        runEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -80,10 +121,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                String laufTimeString = s.toString();
-                if (!isAllDigits(laufTimeString))
+                String runTimeString = s.toString();
+                if (!isAllDigits(runTimeString))
                 {
-                    laufTimeEnteredAlert();
+                    displayWrongRunTimeAlert();
+                }
+                else{
+                    runTime = Double.parseDouble(runTimeString);
                 }
             }
 
@@ -94,7 +138,25 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void laufTimeEnteredAlert()
+
+    public void clickFunction(View view){
+        inputAlertTriggered = false;
+        //TODO: Unfortunately is this implementation wrong: Is has to be event-driven. Better next time.
+        initializeSwitch();
+        initializeAgeEditText();
+        initializeRunEditText();
+        initializeSprintEditText();
+        initializePullUpEditText();
+        //BFTErgebnisBerechnung Auswertung = new BFTErgebnisBerechnung(genderSwitchIsChecked, alter, sprintTime, klimmhangTime, laufTime);
+        //if (!inputAlertTriggered)
+        //{
+            //await Navigation.PushAsync(new ViewResult(Auswertung));
+        //}
+    }
+
+
+    //Alerts
+    private void displayWrongRunTimeAlert()
     {
         if (!inputAlertTriggered)
         {
@@ -102,6 +164,34 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void displayWrongInputAlert()
+    {
+        if (!inputAlertTriggered)
+        {
+            displayAlert("Achtung", "Der Wert wurde nicht als Zahl eingegeben!", "OK");
+            inputAlertTriggered = true;
+        }
+    }
+
+    private void displayWrongAgeAlert()
+    {
+        if (!inputAlertTriggered)
+        {
+            displayAlert("Achtung", "Das Alter muss über 16 und unter 65 Jahren liegen!", "OK");
+            inputAlertTriggered = true;
+        }
+    }
+
+    private void displayMinTimeInputAlert()
+    {
+        if (!inputAlertTriggered)
+        {
+            displayAlert("Achtung", "Zeiten müssen größer als Null sein!", "OK");
+            inputAlertTriggered = true;
+        }
+    }
+
+    //Supporting methods
     private void displayAlert(String titleString, String messageString, String buttonString) {
         AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
         alertDialog.setTitle(titleString);
@@ -130,28 +220,16 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    public void clickFunction(View view){
-        inputAlertTriggered = false;
-        //int alter = Integer.parseInt(alterEditText.getText().toString());
-        double sprintTime = sprintTimeEntered(sprintEditText);
-        //double klimmhangTime = KlimmhangTimeEntered(klimmhangEditText);
-        //double laufTime = LaufTimeEntered(laufEditText);
-        //BFTErgebnisBerechnung Auswertung = new BFTErgebnisBerechnung(genderSwitchIsChecked, alter, sprintTime, klimmhangTime, laufTime);
-        //if (!inputAlertTriggered)
-        //{
-            //await Navigation.PushAsync(new ViewResult(Auswertung));
-        //}
-    }
-
-    private double sprintTimeEntered(EditText inputEditText){
-//        double sprintTime = Double.parseDouble(inputEditText.getText().toString());
-        double validTime = checkForValidTime(inputEditText);
-        if (validTime <= 0)
-        {
-            inputEditText.setBackgroundColor(Color.RED);
-            displayMinTimeInputAlert();
+    public static boolean isInteger(String s) {
+        try {
+            Integer.parseInt(s);
+        } catch(NumberFormatException e) {
+            return false;
+        } catch(NullPointerException e) {
+            return false;
         }
-        return validTime;
+        // only got here if we didn't return false
+        return true;
     }
 
     private double checkForValidTime(EditText inputEditText)
@@ -169,48 +247,5 @@ public class MainActivity extends AppCompatActivity {
         }
         return validTime;
     }
-
-    public static boolean isInteger(String s) {
-        try {
-            Integer.parseInt(s);
-        } catch(NumberFormatException e) {
-            return false;
-        } catch(NullPointerException e) {
-            return false;
-        }
-        // only got here if we didn't return false
-        return true;
-    }
-
-    private void displayWrongInputAlert()
-    {
-        if (!inputAlertTriggered)
-        {
-            displayAlert("Achtung", "Der Wert wurde nicht als Zahl eingegeben!", "OK");
-            inputAlertTriggered = true;
-        }
-    }
-
-    private void displayMinTimeInputAlert()
-    {
-        if (!inputAlertTriggered)
-        {
-            displayAlert("Achtung", "Zeiten müssen größer als Null sein!", "OK");
-            inputAlertTriggered = true;
-        }
-    }
-
-    private double KlimmhangTimeEntered(EditText inputEditText){
-        double klimmhangTime = Double.parseDouble(inputEditText.getText().toString());
-
-        return 0;
-    }
-
-    private double LaufTimeEntered(EditText inputEditText){
-        double laufTime = Double.parseDouble(inputEditText.getText().toString());
-
-        return 0;
-    }
-
 
 }
