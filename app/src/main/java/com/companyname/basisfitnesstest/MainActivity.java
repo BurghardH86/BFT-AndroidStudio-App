@@ -35,12 +35,19 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-    }
 
-    private void initializeSwitch() {
         genderTextView = findViewById(R.id.männlichWeiblichTextView);
         genderSwitch = findViewById(R.id.geschlechtSwitch);
-        genderSwitchIsChecked = genderSwitch.isChecked();
+        ageEditText = findViewById(R.id.alterEditText);
+        sprintEditText = findViewById(R.id.sprintEditText);
+        pullUpEditText = findViewById(R.id.klimmhangEditText);
+        runEditText = findViewById(R.id.laufEditText);
+
+        switchCheckedChangedListener();
+        runTimeTextChangedListener(runEditText);
+    }
+
+    private void switchCheckedChangedListener() {
         genderSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -58,14 +65,37 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void initializeAgeEditText(){
-        ageEditText = findViewById(R.id.alterEditText);
-        checkForValidAge();
+    private void runTimeTextChangedListener(EditText inputEditText){
+        inputEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                String runTimeString = s.toString();
+                if (!isAllDigits(runTimeString))
+                {
+                    displayWrongRunTimeAlert();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
-    private void checkForValidAge(){
-        age = Integer.parseInt(ageEditText.getText().toString());
-        if (age < 16 || age > 65)
+    private void initializeAgeEditText(){
+        age = checkForValidAge();
+    }
+
+    private int checkForValidAge(){
+        int interalAge = Integer.parseInt(ageEditText.getText().toString());
+        if (interalAge < 16 || interalAge > 65)
         {
             ageEditText.setBackgroundColor(Color.RED);
             displayWrongAgeAlert();
@@ -74,10 +104,10 @@ public class MainActivity extends AppCompatActivity {
         {
             ageEditText.setBackgroundColor(Color.TRANSPARENT);
         }
+        return interalAge;
     }
 
     private void initializeSprintEditText(){
-        sprintEditText = findViewById(R.id.sprintEditText);
         sprintTime = checkForValidSprintTime();
     }
 
@@ -92,7 +122,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initializePullUpEditText(){
-        pullUpEditText = findViewById(R.id.klimmhangEditText);
         pullUpTime = checkForValidPullUpTime();
     }
 
@@ -107,42 +136,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initializeRunEditText() {
-        runEditText = findViewById(R.id.laufEditText);
-        checkForValidRunTime();
+        // Here is an error because it tries to parse something like 4:30 to a double. Maybe a time type is helpful.
+        runTime = Double.parseDouble(runEditText.getText().toString());
     }
-
-    private void checkForValidRunTime(){
-        runEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                String runTimeString = s.toString();
-                if (!isAllDigits(runTimeString))
-                {
-                    displayWrongRunTimeAlert();
-                }
-                else{
-                    runTime = Double.parseDouble(runTimeString);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-    }
-
 
     public void clickFunction(View view){
         inputAlertTriggered = false;
         //TODO: Unfortunately is this implementation wrong: Is has to be event-driven. Better next time.
-        initializeSwitch();
         initializeAgeEditText();
         initializeRunEditText();
         initializeSprintEditText();
