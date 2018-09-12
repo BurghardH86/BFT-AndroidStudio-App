@@ -94,17 +94,35 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private int checkForValidAge(){
-        int interalAge = Integer.parseInt(ageEditText.getText().toString());
-        if (interalAge < 16 || interalAge > 65)
-        {
+        if (tryParseInt(ageEditText)) {
+            return getValidAge();
+        }
+        else {
             ageEditText.setBackgroundColor(Color.RED);
             displayWrongAgeAlert();
+            return 0;
         }
-        else
-        {
+    }
+
+    private int getValidAge(){
+        int internalAge = Integer.parseInt(ageEditText.getText().toString());
+        if (internalAge < 16 || internalAge > 65) {
+            ageEditText.setBackgroundColor(Color.RED);
+            displayWrongAgeAlert();
+        } else {
             ageEditText.setBackgroundColor(Color.TRANSPARENT);
         }
-        return interalAge;
+        return internalAge;
+    }
+
+    public boolean tryParseInt(EditText inputEditText){
+        try {
+            Integer.parseInt(inputEditText.getText().toString());
+            return true;
+        }
+        catch (NumberFormatException e){
+            return false;
+        }
     }
 
     private void initializeSprintEditText(){
@@ -136,14 +154,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initializeRunEditText() {
-        // Here is an error because it tries to parse something like 4:30 to a double. Maybe a time type is helpful.
-        runTime = Double.parseDouble(runEditText.getText().toString());
+        String runTimeString = runEditText.getText().toString();
+        String[] arrayOfRunTimeString = runTimeString.split(":", 2);
+        double secondsPerMinute = 60.0;
+        double runTimeMinutes = Double.parseDouble(arrayOfRunTimeString[0]);
+        double runTimeSeconds = Double.parseDouble(arrayOfRunTimeString[1]);
+        runTime = runTimeMinutes*secondsPerMinute + runTimeSeconds;
     }
 
     public void clickFunction(View view){
         inputAlertTriggered = false;
         //TODO: Unfortunately is this implementation wrong: Is has to be event-driven. Better next time.
         initializeAgeEditText();
+        //TODO: tryParse for all three methods
         initializeRunEditText();
         initializeSprintEditText();
         initializePullUpEditText();
