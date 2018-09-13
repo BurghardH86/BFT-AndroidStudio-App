@@ -115,16 +115,6 @@ public class MainActivity extends AppCompatActivity {
         return internalAge;
     }
 
-    public boolean tryParseInt(EditText inputEditText){
-        try {
-            Integer.parseInt(inputEditText.getText().toString());
-            return true;
-        }
-        catch (NumberFormatException e){
-            return false;
-        }
-    }
-
     private void initializeSprintEditText(){
         sprintTime = checkForValidSprintTime();
     }
@@ -157,8 +147,16 @@ public class MainActivity extends AppCompatActivity {
         String runTimeString = runEditText.getText().toString();
         String[] arrayOfRunTimeString = runTimeString.split(":", 2);
         double secondsPerMinute = 60.0;
-        double runTimeMinutes = Double.parseDouble(arrayOfRunTimeString[0]);
-        double runTimeSeconds = Double.parseDouble(arrayOfRunTimeString[1]);
+        double runTimeMinutes = 0.0;
+        double runTimeSeconds = 0.0;
+        if (tryParseDouble(arrayOfRunTimeString[0]) && tryParseDouble(arrayOfRunTimeString[1])) {
+            runTimeMinutes = Double.parseDouble(arrayOfRunTimeString[0]);
+            runTimeSeconds = Double.parseDouble(arrayOfRunTimeString[1]);
+        }
+        else{
+            runEditText.setBackgroundColor(Color.RED);
+            displayWrongRunTimeAlert();
+        }
         runTime = runTimeMinutes*secondsPerMinute + runTimeSeconds;
     }
 
@@ -166,10 +164,11 @@ public class MainActivity extends AppCompatActivity {
         inputAlertTriggered = false;
         //TODO: Unfortunately is this implementation wrong: Is has to be event-driven. Better next time.
         initializeAgeEditText();
-        //TODO: tryParse for all three methods
         initializeRunEditText();
+        //TODO: tryParse for all two methods
         initializeSprintEditText();
         initializePullUpEditText();
+        //TODO: Change return value of the initialize methods to a primitive type.
         //BFTErgebnisBerechnung Auswertung = new BFTErgebnisBerechnung(genderSwitchIsChecked, alter, sprintTime, klimmhangTime, laufTime);
         //if (!inputAlertTriggered)
         //{
@@ -269,6 +268,26 @@ public class MainActivity extends AppCompatActivity {
             validTime = Double.parseDouble(inputEditText.getText().toString());
         }
         return validTime;
+    }
+
+    public boolean tryParseInt(EditText inputEditText){
+        try {
+            Integer.parseInt(inputEditText.getText().toString());
+            return true;
+        }
+        catch (NumberFormatException e){
+            return false;
+        }
+    }
+
+    public boolean tryParseDouble(EditText inputString){
+        try {
+            Double.parseDouble(inputEditText.getText().toString());
+            return true;
+        }
+        catch (NumberFormatException e){
+            return false;
+        }
     }
 
 }
