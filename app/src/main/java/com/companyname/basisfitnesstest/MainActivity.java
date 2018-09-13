@@ -280,9 +280,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public boolean tryParseDouble(EditText inputString){
+    public boolean tryParseDouble(String inputString){
         try {
-            Double.parseDouble(inputEditText.getText().toString());
+            Double.parseDouble(inputString);
             return true;
         }
         catch (NumberFormatException e){
