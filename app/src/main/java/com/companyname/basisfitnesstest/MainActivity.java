@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
         switchCheckedChangedListener();
         runTimeTextChangedListener(runEditText);
+        //TODO: If a seekbar is used for the input of the age, it will need a listener.
     }
 
     private void switchCheckedChangedListener() {
@@ -66,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void runTimeTextChangedListener(EditText inputEditText){
+        //Because of the restrictions regarding the possible input, it is important to use a listener for changing text here.
         inputEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -90,17 +92,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initializeAgeEditText(){
-        age = checkForValidAge();
+        checkForValidAge();
     }
 
-    private int checkForValidAge(){
+    private void checkForValidAge(){
         if (tryParseInt(ageEditText)) {
-            return getValidAge();
+            age = getValidAge();
         }
         else {
             ageEditText.setBackgroundColor(Color.RED);
             displayWrongAgeAlert();
-            return 0;
         }
     }
 
@@ -116,35 +117,39 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initializeSprintEditText(){
-        sprintTime = checkForValidSprintTime();
+        checkForValidSprintTime();
     }
 
-    private double checkForValidSprintTime(){
+    private void checkForValidSprintTime(){
         double validTime = checkForValidTime(sprintEditText);
         if (validTime <= 0)
         {
             sprintEditText.setBackgroundColor(Color.RED);
             displayMinTimeInputAlert();
         }
-        return validTime;
+        sprintTime = validTime;
     }
 
     private void initializePullUpEditText(){
-        pullUpTime = checkForValidPullUpTime();
+        checkForValidPullUpTime();
     }
 
-    private double checkForValidPullUpTime(){
+    private void checkForValidPullUpTime(){
         double validTime = checkForValidTime(pullUpEditText);
         if (validTime < 0.0)
         {
             sprintEditText.setBackgroundColor(Color.RED);
             displayMinTimeInputAlert();
         }
-        return validTime;
+        pullUpTime = validTime;
     }
 
     private void initializeRunEditText() {
         String runTimeString = runEditText.getText().toString();
+        checkForValidRunTime(runTimeString);
+    }
+
+    private void checkForValidRunTime(String runTimeString) {
         String[] arrayOfRunTimeString = runTimeString.split(":", 2);
         double secondsPerMinute = 60.0;
         double runTimeMinutes = 0.0;
@@ -152,23 +157,21 @@ public class MainActivity extends AppCompatActivity {
         if (tryParseDouble(arrayOfRunTimeString[0]) && tryParseDouble(arrayOfRunTimeString[1])) {
             runTimeMinutes = Double.parseDouble(arrayOfRunTimeString[0]);
             runTimeSeconds = Double.parseDouble(arrayOfRunTimeString[1]);
+            runEditText.setBackgroundColor(Color.TRANSPARENT);
         }
         else{
             runEditText.setBackgroundColor(Color.RED);
-            displayWrongRunTimeAlert();
+            displayWrongRunTimeAlertExplanation();
         }
         runTime = runTimeMinutes*secondsPerMinute + runTimeSeconds;
     }
 
     public void clickFunction(View view){
         inputAlertTriggered = false;
-        //TODO: Unfortunately is this implementation wrong: Is has to be event-driven. Better next time.
         initializeAgeEditText();
         initializeRunEditText();
-        //TODO: tryParse for all two methods
         initializeSprintEditText();
         initializePullUpEditText();
-        //TODO: Change return value of the initialize methods to a primitive type.
         //BFTErgebnisBerechnung Auswertung = new BFTErgebnisBerechnung(genderSwitchIsChecked, alter, sprintTime, klimmhangTime, laufTime);
         //if (!inputAlertTriggered)
         //{
@@ -183,6 +186,14 @@ public class MainActivity extends AppCompatActivity {
         if (!inputAlertTriggered)
         {
             displayAlert("Achtung", "Es dürfen nur Zahlen und ':' eingegeben werden!", "OK");
+        }
+    }
+
+    private void displayWrongRunTimeAlertExplanation()
+    {
+        if (!inputAlertTriggered)
+        {
+            displayAlert("Achtung", "Es dürfen nur Zahlen in dem Format Minuten:Sekunden (mm:ss) eingetragen werden!", "OK");
         }
     }
 
@@ -265,7 +276,9 @@ public class MainActivity extends AppCompatActivity {
         else
         {
             inputEditText.setBackgroundColor(Color.TRANSPARENT);
-            validTime = Double.parseDouble(inputEditText.getText().toString());
+            if (tryParseDouble(inputEditText.getText().toString())) {
+                validTime = Double.parseDouble(inputEditText.getText().toString());
+            }
         }
         return validTime;
     }
