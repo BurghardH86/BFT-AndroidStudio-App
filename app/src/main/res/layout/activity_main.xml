@@ -42,10 +42,10 @@
             android:layout_gravity="center_horizontal"
             android:layout_margin="8dp"
             android:text="Männlich"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/geschlechtSwitch" />
-        <!--</LinearLayout>-->
 
         <TextView
             android:id="@+id/alterTextView"
@@ -56,15 +56,28 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/männlichWeiblichTextView" />
 
-        <!--<SeekBar-->
-            <!--android:id="@+id/alterSeekBar"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_margin="8dp"-->
-            <!--android:max="65"-->
-            <!--android:progress="16" />-->
+        <SeekBar
+            android:id="@+id/alterSeekBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:max="49"
+            android:progress="0" />
+            <!--Maximum age from 0 to 49-->
 
-        <EditText
+        <TextView
+            android:id="@+id/alterChangeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="8dp"
+            android:text="16"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/alterSeekBar" />
+
+        <!--<EditText
             android:id="@+id/alterEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -72,7 +85,8 @@
             android:ems="10"
             android:hint="Alter in Jahren"
             android:inputType="number"
-            android:text="" />
+            android:text="" />-->
+
         <TextView
             android:id="@+id/sprintTextView"
             android:layout_width="wrap_content"

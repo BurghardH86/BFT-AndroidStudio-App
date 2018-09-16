@@ -11,8 +11,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,12 +24,16 @@ public class MainActivity extends AppCompatActivity {
     private EditText sprintEditText;
     private EditText pullUpEditText;
     private EditText runEditText;
+    private SeekBar ageSeekBar;
+    private TextView ageChangeTextView;
 
     private boolean genderSwitchIsChecked = false;
     private int age = 0;
     private double sprintTime = 0.0;
     private double pullUpTime = 0.0;
     private double runTime = 0.0;
+    private int maxValue = 65;
+    private int seekBarValue = 0;
 
     private boolean inputAlertTriggered;
 
@@ -38,14 +44,17 @@ public class MainActivity extends AppCompatActivity {
 
         genderTextView = findViewById(R.id.männlichWeiblichTextView);
         genderSwitch = findViewById(R.id.geschlechtSwitch);
-        ageEditText = findViewById(R.id.alterEditText);
+        //ageEditText = findViewById(R.id.alterEditText);
         sprintEditText = findViewById(R.id.sprintEditText);
         pullUpEditText = findViewById(R.id.klimmhangEditText);
         runEditText = findViewById(R.id.laufEditText);
+        ageSeekBar = findViewById(R.id.alterSeekBar);
+        ageChangeTextView = findViewById(R.id.alterChangeTextView);
 
         switchCheckedChangedListener();
         runTimeTextChangedListener(runEditText);
-        //TODO: If a seekbar is used for the input of the age, it will need a listener.
+        initializeSeekBar();
+        seekBarChangedListener();
     }
 
     private void switchCheckedChangedListener() {
@@ -62,6 +71,30 @@ public class MainActivity extends AppCompatActivity {
                     genderTextView.setText("Männlich");  //To change the text near to switch
                     Log.d("You are :", " Not Checked");
                 }
+            }
+        });
+    }
+
+    private void initializeSeekBar(){
+        maxValue = ageSeekBar.getMax(); // get maximum value of the Seek bar
+        seekBarValue = ageSeekBar.getProgress(); // get progress value from the Seek bar
+    }
+
+    private void seekBarChangedListener(){
+        ageSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                seekBarValue = progress + 16;
+                ageChangeTextView.setText(String.valueOf(seekBarValue));
+            }
+
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            public void onStopTrackingTouch(SeekBar seekBar) {
+//                Toast.makeText(MainActivity.this, "Seek bar progress is :" + seekBarValue,
+//                        Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -168,6 +201,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void clickFunction(View view){
         inputAlertTriggered = false;
+        //TODO: Change initializeAgeEditText to SeekBar.
         initializeAgeEditText();
         initializeRunEditText();
         initializeSprintEditText();
