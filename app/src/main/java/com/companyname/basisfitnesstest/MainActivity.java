@@ -20,7 +20,6 @@ public class MainActivity extends AppCompatActivity {
 
     private Switch genderSwitch = null;
     private TextView genderTextView = null;
-    private EditText ageEditText;
     private EditText sprintEditText;
     private EditText pullUpEditText;
     private EditText runEditText;
@@ -44,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
 
         genderTextView = findViewById(R.id.männlichWeiblichTextView);
         genderSwitch = findViewById(R.id.geschlechtSwitch);
-        //ageEditText = findViewById(R.id.alterEditText);
         sprintEditText = findViewById(R.id.sprintEditText);
         pullUpEditText = findViewById(R.id.klimmhangEditText);
         runEditText = findViewById(R.id.laufEditText);
@@ -77,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initializeSeekBar(){
         maxValue = ageSeekBar.getMax(); // get maximum value of the Seek bar
-        seekBarValue = ageSeekBar.getProgress(); // get progress value from the Seek bar
+        seekBarValue = ageSeekBar.getProgress() + 16; // get progress value from the Seek bar
     }
 
     private void seekBarChangedListener(){
@@ -93,8 +91,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             public void onStopTrackingTouch(SeekBar seekBar) {
-//                Toast.makeText(MainActivity.this, "Seek bar progress is :" + seekBarValue,
-//                        Toast.LENGTH_SHORT).show();
+
             }
         });
     }
@@ -122,31 +119,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-    }
-
-    private void initializeAgeEditText(){
-        checkForValidAge();
-    }
-
-    private void checkForValidAge(){
-        if (tryParseInt(ageEditText)) {
-            age = getValidAge();
-        }
-        else {
-            ageEditText.setBackgroundColor(Color.RED);
-            displayWrongAgeAlert();
-        }
-    }
-
-    private int getValidAge(){
-        int internalAge = Integer.parseInt(ageEditText.getText().toString());
-        if (internalAge < 16 || internalAge > 65) {
-            ageEditText.setBackgroundColor(Color.RED);
-            displayWrongAgeAlert();
-        } else {
-            ageEditText.setBackgroundColor(Color.TRANSPARENT);
-        }
-        return internalAge;
     }
 
     private void initializeSprintEditText(){
@@ -201,8 +173,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void clickFunction(View view){
         inputAlertTriggered = false;
-        //TODO: Change initializeAgeEditText to SeekBar.
-        initializeAgeEditText();
         initializeRunEditText();
         initializeSprintEditText();
         initializePullUpEditText();
@@ -236,15 +206,6 @@ public class MainActivity extends AppCompatActivity {
         if (!inputAlertTriggered)
         {
             displayAlert("Achtung", "Der Wert wurde nicht als Zahl eingegeben!", "OK");
-            inputAlertTriggered = true;
-        }
-    }
-
-    private void displayWrongAgeAlert()
-    {
-        if (!inputAlertTriggered)
-        {
-            displayAlert("Achtung", "Das Alter muss über 16 und unter 65 Jahren liegen!", "OK");
             inputAlertTriggered = true;
         }
     }
@@ -315,16 +276,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         return validTime;
-    }
-
-    public boolean tryParseInt(EditText inputEditText){
-        try {
-            Integer.parseInt(inputEditText.getText().toString());
-            return true;
-        }
-        catch (NumberFormatException e){
-            return false;
-        }
     }
 
     public boolean tryParseDouble(String inputString){
