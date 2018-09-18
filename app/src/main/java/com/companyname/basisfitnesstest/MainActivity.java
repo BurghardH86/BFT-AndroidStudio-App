@@ -179,6 +179,7 @@ public class MainActivity extends AppCompatActivity {
         initializePullUpEditText();
         Intent startResultActivity = new Intent(this, ResultsActivity.class);
         startActivity(startResultActivity);
+        DataProcessingModel Auswertung = new DataProcessingModel(genderSwitchIsChecked, age, sprintTime, pullUpTime, runTime);
         //BFTErgebnisBerechnung Auswertung = new BFTErgebnisBerechnung(genderSwitchIsChecked, alter, sprintTime, klimmhangTime, laufTime);
         //if (!inputAlertTriggered)
         //{
