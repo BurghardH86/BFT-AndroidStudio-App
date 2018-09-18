@@ -1,6 +1,7 @@
 package com.companyname.basisfitnesstest;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -176,6 +177,8 @@ public class MainActivity extends AppCompatActivity {
         initializeRunEditText();
         initializeSprintEditText();
         initializePullUpEditText();
+        Intent startResultActivity = new Intent(this, ResultsActivity.class);
+        startActivity(startResultActivity);
         //BFTErgebnisBerechnung Auswertung = new BFTErgebnisBerechnung(genderSwitchIsChecked, alter, sprintTime, klimmhangTime, laufTime);
         //if (!inputAlertTriggered)
         //{
