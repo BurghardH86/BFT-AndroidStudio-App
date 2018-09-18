@@ -6,4 +6,161 @@
     android:layout_height="match_parent"
     tools:context=".ResultsActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <TextView
+            android:id="@+id/ergebnisTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="12dp"
+            android:text="Ergebnis"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/sprintLabelTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="11 x 10 m Sprinttest"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/sprintTimeTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:padding="1dp"
+            android:paddingStart="40dp"
+            android:text="Zeit = 60 s" />
+
+        <TextView
+            android:id="@+id/sprintPointTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:padding="1dp"
+            android:paddingStart="40dp"
+            android:text="150 Punkte" />
+
+        <TextView
+            android:id="@+id/sprintGradeTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:padding="1dp"
+            android:paddingStart="40dp"
+            android:text="Note 4.23" />
+
+        <TextView
+            android:id="@+id/klimmhangLabelTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="Klimmhang"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/klimmhangTimeTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:padding="1dp"
+            android:paddingStart="40dp"
+            android:text="Zeit = 60 s" />
+
+        <TextView
+            android:id="@+id/klimmhangPointTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:padding="1dp"
+            android:paddingStart="40dp"
+            android:text="150 Punkte" />
+
+        <TextView
+            android:id="@+id/klimmhangGradeTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:padding="1dp"
+            android:paddingStart="40dp"
+            android:text="Note 4.23" />
+
+        <TextView
+            android:id="@+id/laufLabelTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="1000-m-Lauf"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/laufTimeTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:padding="1dp"
+            android:paddingStart="40dp"
+            android:text="Zeit = 60 s" />
+
+        <TextView
+            android:id="@+id/laufPointTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:padding="1dp"
+            android:paddingStart="40dp"
+            android:text="150 Punkte" />
+
+        <TextView
+            android:id="@+id/laufGradeTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:padding="1dp"
+            android:paddingStart="40dp"
+            android:text="Note 4.23" />
+
+        <TextView
+            android:id="@+id/bewertungTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="12dp"
+            android:text="Gesamtbewertung"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/ratingTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="Sehr Gut"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/gradeTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="Note 1.3"
+            android:textStyle="bold" />
+
+    </LinearLayout>
 </android.support.constraint.ConstraintLayout>
