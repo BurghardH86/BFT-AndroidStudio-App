@@ -178,8 +178,13 @@ public class MainActivity extends AppCompatActivity {
         initializeSprintEditText();
         initializePullUpEditText();
         Intent startResultActivity = new Intent(this, ResultsActivity.class);
-        startActivity(startResultActivity);
-        DataProcessingModel Auswertung = new DataProcessingModel(genderSwitchIsChecked, age, sprintTime, pullUpTime, runTime);
+
+        DataProcessingModel fitnessDataAnalysis = new DataProcessingModel(genderSwitchIsChecked, age, sprintTime, pullUpTime, runTime);
+        //TODO: I need some async method for my navigation.
+        if (!inputAlertTriggered) {
+            startResultActivity.putExtra("analysedData", fitnessDataAnalysis);
+            startActivity(startResultActivity);
+        }
         //BFTErgebnisBerechnung Auswertung = new BFTErgebnisBerechnung(genderSwitchIsChecked, alter, sprintTime, klimmhangTime, laufTime);
         //if (!inputAlertTriggered)
         //{

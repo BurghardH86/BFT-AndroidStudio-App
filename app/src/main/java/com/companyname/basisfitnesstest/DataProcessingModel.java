@@ -1,7 +1,10 @@
 package com.companyname.basisfitnesstest;
 
-public class DataProcessingModel {
+import java.io.Serializable;
 
+public class DataProcessingModel implements Serializable {
+
+    //TODO: Probably a getter and setter implementation could be nice.
     public boolean Weiblich;
     public int Alter;
     public double SprintTime;
