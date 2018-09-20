@@ -77,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
     private void initializeSeekBar(){
         maxValue = ageSeekBar.getMax(); // get maximum value of the Seek bar
         seekBarValue = ageSeekBar.getProgress() + 16; // get progress value from the Seek bar
+        age = seekBarValue;
     }
 
     private void seekBarChangedListener(){
@@ -84,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
 
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 seekBarValue = progress + 16;
+                age = seekBarValue;
                 ageChangeTextView.setText(String.valueOf(seekBarValue));
             }
 
@@ -177,13 +179,15 @@ public class MainActivity extends AppCompatActivity {
         initializeRunEditText();
         initializeSprintEditText();
         initializePullUpEditText();
-        Intent startResultActivity = new Intent(this, ResultsActivity.class);
+        //Intent startResultActivity = new Intent(this, ResultsActivity.class);
+        Intent testAcitivity = new Intent(this, TestActivity.class);
 
         DataProcessingModel fitnessDataAnalysis = new DataProcessingModel(genderSwitchIsChecked, age, sprintTime, pullUpTime, runTime);
         //TODO: I need some async method for my navigation.
         if (!inputAlertTriggered) {
-            startResultActivity.putExtra("analysedData", fitnessDataAnalysis);
-            startActivity(startResultActivity);
+            //startResultActivity.putExtra("analysedData", fitnessDataAnalysis);
+            //startActivity(startResultActivity);
+            startActivity(testAcitivity);
         }
         //BFTErgebnisBerechnung Auswertung = new BFTErgebnisBerechnung(genderSwitchIsChecked, alter, sprintTime, klimmhangTime, laufTime);
         //if (!inputAlertTriggered)
