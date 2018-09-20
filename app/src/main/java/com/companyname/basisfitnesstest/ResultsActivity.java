@@ -12,32 +12,45 @@ public class ResultsActivity extends AppCompatActivity {
 
     private DataProcessingModel analysisOfInput;
 
-    private TextView sprintTimeTextView = findViewById(R.id.sprintTimeTextView);
-    private TextView sprintPointsTextView = findViewById(R.id.sprintPointTextView);
-    private TextView sprintGradeTextView = findViewById(R.id.sprintGradeTextView);
+    private TextView sprintTimeTextView;
+    private TextView sprintPointsTextView;
+    private TextView sprintGradeTextView;
 
-    private TextView pullUpTimeTextView = findViewById(R.id.klimmhangTimeTextView);
-    private TextView pullUpPointsTextView = findViewById(R.id.klimmhangPointTextView);
-    private TextView pullUpGradeTextView = findViewById(R.id.klimmhangGradeTextView);
+    private TextView pullUpTimeTextView;
+    private TextView pullUpPointsTextView;
+    private TextView pullUpGradeTextView;
 
-    private TextView runTimeTextView = findViewById(R.id.laufTimeTextView);
-    private TextView runPointsTextView = findViewById(R.id.laufPointTextView);
-    private TextView runGradeTextView = findViewById(R.id.laufGradeTextView);
+    private TextView runTimeTextView;
+    private TextView runPointsTextView;
+    private TextView runGradeTextView;
 
-    private TextView ratingTextView = findViewById(R.id.ratingTextView);
-    private TextView gradeTextView = findViewById(R.id.gradeTextView);
-
-
-    public ResultsActivity(){
-        Intent startResultActivity = getIntent();
-        analysisOfInput = (DataProcessingModel)startResultActivity.getSerializableExtra("analysedData");
-        setValues();
-    }
+    private TextView ratingTextView;
+    private TextView gradeTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_results);
+
+        Intent startResultActivity = getIntent();
+        analysisOfInput = (DataProcessingModel)startResultActivity.getSerializableExtra("analysedData");
+
+        this.sprintTimeTextView = findViewById(R.id.sprintTimeResultTextView);
+        this.sprintPointsTextView = findViewById(R.id.sprintPointResultTextView);
+        this.sprintGradeTextView = findViewById(R.id.sprintGradeResultTextView);
+
+        this.pullUpTimeTextView = findViewById(R.id.klimmhangTimeResultTextView);
+        this.pullUpPointsTextView = findViewById(R.id.klimmhangPointResultTextView);
+        this.pullUpGradeTextView = findViewById(R.id.klimmhangGradeResultTextView);
+
+        this.runTimeTextView = findViewById(R.id.laufTimeResultTextView);
+        this.runPointsTextView = findViewById(R.id.laufPointResultTextView);
+        this.runGradeTextView = findViewById(R.id.laufGradeResultTextView);
+
+        this.ratingTextView = findViewById(R.id.ratingTextView);
+        this.gradeTextView = findViewById(R.id.gradeTextView);
+
+        setValues();
     }
 
     public void setValues()

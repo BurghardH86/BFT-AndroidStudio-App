@@ -36,7 +36,7 @@
             android:textStyle="bold"/>
 
         <TextView
-            android:id="@+id/sprintTimeTextView"
+            android:id="@+id/sprintTimeResultTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="start"
@@ -45,7 +45,7 @@
             android:text="Zeit = 60 s" />
 
         <TextView
-            android:id="@+id/sprintPointTextView"
+            android:id="@+id/sprintPointResultTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="start"
@@ -54,7 +54,7 @@
             android:text="150 Punkte" />
 
         <TextView
-            android:id="@+id/sprintGradeTextView"
+            android:id="@+id/sprintGradeResultTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="start"
@@ -72,7 +72,7 @@
             android:textStyle="bold"/>
 
         <TextView
-            android:id="@+id/klimmhangTimeTextView"
+            android:id="@+id/klimmhangTimeResultTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="start"
@@ -81,7 +81,7 @@
             android:text="Zeit = 60 s" />
 
         <TextView
-            android:id="@+id/klimmhangPointTextView"
+            android:id="@+id/klimmhangPointResultTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="start"
@@ -90,7 +90,7 @@
             android:text="150 Punkte" />
 
         <TextView
-            android:id="@+id/klimmhangGradeTextView"
+            android:id="@+id/klimmhangGradeResultTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="start"
@@ -108,7 +108,7 @@
             android:textStyle="bold"/>
 
         <TextView
-            android:id="@+id/laufTimeTextView"
+            android:id="@+id/laufTimeResultTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="start"
@@ -117,7 +117,7 @@
             android:text="Zeit = 60 s" />
 
         <TextView
-            android:id="@+id/laufPointTextView"
+            android:id="@+id/laufPointResultTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="start"
@@ -126,7 +126,7 @@
             android:text="150 Punkte" />
 
         <TextView
-            android:id="@+id/laufGradeTextView"
+            android:id="@+id/laufGradeResultTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="start"
