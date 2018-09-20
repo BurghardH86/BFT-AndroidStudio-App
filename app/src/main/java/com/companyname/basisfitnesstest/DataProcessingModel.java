@@ -182,7 +182,7 @@ public class DataProcessingModel implements Serializable {
 
     public String BewertungDerPunkte(int jeweiligeDisziplinpunkte)
     {
-        String bewertungsErgebnis = "Nicht bestanden";
+        String bewertungsErgebnis;
         if (jeweiligeDisziplinpunkte >= 100 && jeweiligeDisziplinpunkte < 200)
         {
             bewertungsErgebnis = "Ausreichend";
@@ -201,7 +201,7 @@ public class DataProcessingModel implements Serializable {
         }
         else
         {
-            bewertungsErgebnis = "Nicht bestanden";
+            bewertungsErgebnis = "Nicht bestanden!";
             NichtBestanden = true;
         }
         return bewertungsErgebnis;
