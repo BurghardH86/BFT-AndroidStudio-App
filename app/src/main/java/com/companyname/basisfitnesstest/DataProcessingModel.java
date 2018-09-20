@@ -1,6 +1,7 @@
 package com.companyname.basisfitnesstest;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 
 public class DataProcessingModel implements Serializable {
 
@@ -136,7 +137,8 @@ public class DataProcessingModel implements Serializable {
             double prozentualerUnterschiedZwischenNoten = 1 - (448.0 / 449.0);
             ergebnisNote = 1 + (0.01 * (1 - prozentualerAnteil) / prozentualerUnterschiedZwischenNoten);
         }
-        return Math.round(ergebnisNote);
+        DecimalFormat correctRoundDouble = new DecimalFormat("#.##");
+        return Double.parseDouble(correctRoundDouble.format(ergebnisNote));
     }
 
     public double NoteSprint()
