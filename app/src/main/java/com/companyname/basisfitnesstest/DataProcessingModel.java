@@ -137,8 +137,9 @@ public class DataProcessingModel implements Serializable {
             double prozentualerUnterschiedZwischenNoten = 1 - (448.0 / 449.0);
             ergebnisNote = 1 + (0.01 * (1 - prozentualerAnteil) / prozentualerUnterschiedZwischenNoten);
         }
-        DecimalFormat correctRoundDouble = new DecimalFormat("#.##");
-        return Double.parseDouble(correctRoundDouble.format(ergebnisNote));
+
+        double correctRoundedGrade = Math.round(ergebnisNote*100)/100.0;
+        return correctRoundedGrade;
     }
 
     public double NoteSprint()
@@ -179,7 +180,8 @@ public class DataProcessingModel implements Serializable {
         {
             return Math.round(5.00);
         }
-        return Math.round(noteGesamt);
+        double correctRoundedGrade = Math.round(noteGesamt*100)/100.0;
+        return correctRoundedGrade;
     }
 
     public String BewertungDerPunkte(int jeweiligeDisziplinpunkte)
