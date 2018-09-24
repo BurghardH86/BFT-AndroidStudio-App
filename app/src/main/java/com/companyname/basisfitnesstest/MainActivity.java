@@ -3,6 +3,7 @@ package com.companyname.basisfitnesstest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,6 +19,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static int SPLASH_TIME_OUT = 3000;
 
     private Switch genderSwitch = null;
     private TextView genderTextView = null;
@@ -41,6 +44,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent splashIntent = new Intent(MainActivity.this, SplashScreen.class);
+                startActivity(splashIntent);
+                finish();
+            }
+        }, SPLASH_TIME_OUT);
 
         genderTextView = findViewById(R.id.männlichWeiblichTextView);
         genderSwitch = findViewById(R.id.geschlechtSwitch);
@@ -180,14 +192,12 @@ public class MainActivity extends AppCompatActivity {
         initializeSprintEditText();
         initializePullUpEditText();
         Intent startResultActivity = new Intent(this, ResultsActivity.class);
-        //Intent testAcitivity = new Intent(this, TestActivity.class);
 
         DataProcessingModel fitnessDataAnalysis = new DataProcessingModel(genderSwitchIsChecked, age, sprintTime, pullUpTime, runTime);
         //TODO: I need some async method for my navigation.
         if (!inputAlertTriggered) {
             startResultActivity.putExtra("analysedData", fitnessDataAnalysis);
             startActivity(startResultActivity);
-            //startActivity(testAcitivity);
         }
         //BFTErgebnisBerechnung Auswertung = new BFTErgebnisBerechnung(genderSwitchIsChecked, alter, sprintTime, klimmhangTime, laufTime);
         //if (!inputAlertTriggered)
