@@ -35,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
     private double sprintTime = 0.0;
     private double pullUpTime = 0.0;
     private double runTime = 0.0;
-    private int maxValue = 65;
     private int seekBarValue = 0;
 
     private boolean inputAlertTriggered;
@@ -44,15 +43,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent splashIntent = new Intent(MainActivity.this, SplashScreen.class);
-                startActivity(splashIntent);
-                finish();
-            }
-        }, SPLASH_TIME_OUT);
 
         genderTextView = findViewById(R.id.männlichWeiblichTextView);
         genderSwitch = findViewById(R.id.geschlechtSwitch);
@@ -69,17 +59,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void switchCheckedChangedListener() {
+        final String femaleString = "Weiblich";
+        final String maleString = "Männlich";
         genderSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) {
                     genderSwitchIsChecked = genderSwitch.isChecked();
-                    genderTextView.setText("Weiblich");  //To change the text near to switch
+                    genderTextView.setText(femaleString);  //To change the text near to switch
                     Log.d("You are :", "Checked");
                 }
                 else {
                     genderSwitchIsChecked = !genderSwitch.isChecked();
-                    genderTextView.setText("Männlich");  //To change the text near to switch
+                    genderTextView.setText(maleString);  //To change the text near to switch
                     Log.d("You are :", " Not Checked");
                 }
             }
@@ -87,7 +79,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initializeSeekBar(){
-        maxValue = ageSeekBar.getMax(); // get maximum value of the Seek bar
         seekBarValue = ageSeekBar.getProgress() + 16; // get progress value from the Seek bar
         age = seekBarValue;
     }
@@ -199,11 +190,6 @@ public class MainActivity extends AppCompatActivity {
             startResultActivity.putExtra("analysedData", fitnessDataAnalysis);
             startActivity(startResultActivity);
         }
-        //BFTErgebnisBerechnung Auswertung = new BFTErgebnisBerechnung(genderSwitchIsChecked, alter, sprintTime, klimmhangTime, laufTime);
-        //if (!inputAlertTriggered)
-        //{
-            //await Navigation.PushAsync(new ViewResult(Auswertung));
-        //}
     }
 
 
