@@ -44,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //TODO: A scrollbar for smaller resolutions
+
         genderTextView = findViewById(R.id.männlichWeiblichTextView);
         genderSwitch = findViewById(R.id.geschlechtSwitch);
         sprintEditText = findViewById(R.id.sprintEditText);
