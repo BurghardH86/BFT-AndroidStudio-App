@@ -6,149 +6,145 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/geschlechtTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:text="Geschlecht:"
-            android:visibility="visible"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Switch
-            android:id="@+id/geschlechtSwitch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="8dp"
-            android:checked="false"
-            android:gravity="center_horizontal"
-            app:layout_constraintTop_toBottomOf="@+id/geschlechtTextView"
-            tools:checked="false" />
-
-        <TextView
-            android:id="@+id/männlichWeiblichTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="8dp"
-            android:text="Männlich"
-            android:textStyle="bold"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/geschlechtSwitch" />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/alterTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:text="Alter:"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/männlichWeiblichTextView" />
+            <TextView
+                android:id="@+id/geschlechtTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="Geschlecht:"
+                android:visibility="visible"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <SeekBar
-            android:id="@+id/alterSeekBar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:max="49"
-            android:progress="0" />
-            <!--Maximum age from 0 to 49-->
+            <Switch
+                android:id="@+id/geschlechtSwitch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="8dp"
+                android:checked="false"
+                android:gravity="center_horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/geschlechtTextView"
+                tools:checked="false" />
 
-        <TextView
-            android:id="@+id/alterChangeTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="8dp"
-            android:text="16"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/alterSeekBar" />
+            <TextView
+                android:id="@+id/männlichWeiblichTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="8dp"
+                android:text="Männlich"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/geschlechtSwitch" />
 
-        <!--<EditText
-            android:id="@+id/alterEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:ems="10"
-            android:hint="Alter in Jahren"
-            android:inputType="number"
-            android:text="" />-->
+            <TextView
+                android:id="@+id/alterTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="Alter:"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/männlichWeiblichTextView" />
 
-        <TextView
-            android:id="@+id/sprintTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:text="11 x 10 m-Sprinttest:" />
+            <SeekBar
+                android:id="@+id/alterSeekBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:max="49"
+                android:progress="0" />
+            <!--Maximum age from 0 to 49. Later we add 16 to get an age of 65-->
 
-        <EditText
-            android:id="@+id/sprintEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:ems="10"
-            android:hint="Zeit in Sekunden (s)"
-            android:inputType="number"
-            android:text="" />
+            <TextView
+                android:id="@+id/alterChangeTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="8dp"
+                android:text="16"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/alterSeekBar" />
 
-        <TextView
-            android:id="@+id/klimmhangTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:text="Klimmhang:" />
+            <TextView
+                android:id="@+id/sprintTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="11 x 10 m-Sprinttest:" />
 
-        <EditText
-            android:id="@+id/klimmhangEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:ems="10"
-            android:hint="Zeit in Sekunden (s)"
-            android:inputType="number"
-            android:text="" />
+            <EditText
+                android:id="@+id/sprintEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:ems="10"
+                android:hint="Zeit in Sekunden (s)"
+                android:inputType="number"
+                android:text="" />
 
-        <TextView
-            android:id="@+id/laufTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:text="1000-m-Lauf:" />
+            <TextView
+                android:id="@+id/klimmhangTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="Klimmhang:" />
 
-        <EditText
-            android:id="@+id/laufEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:ems="10"
-            android:hint="Zeit in Minuten:Sekunden (mm:ss)"
-            android:inputType="text"
-            android:text="" />
+            <EditText
+                android:id="@+id/klimmhangEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:ems="10"
+                android:hint="Zeit in Sekunden (s)"
+                android:inputType="number"
+                android:text="" />
 
-        <Button
-            android:id="@+id/ergebnisButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="8dp"
-            android:onClick="clickFunction"
-            android:text="ERGEBNIS"
-            tools:layout_editor_absoluteX="148dp"
-            tools:layout_editor_absoluteY="231dp" />
-    </LinearLayout>
+            <TextView
+                android:id="@+id/laufTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="1000-m-Lauf:" />
+
+            <EditText
+                android:id="@+id/laufEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:ems="10"
+                android:hint="Zeit in Minuten:Sekunden (mm:ss)"
+                android:inputType="text"
+                android:text="" />
+
+            <Button
+                android:id="@+id/ergebnisButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="8dp"
+                android:onClick="clickFunction"
+                android:text="ERGEBNIS"
+                tools:layout_editor_absoluteX="148dp"
+                tools:layout_editor_absoluteY="231dp" />
+        </LinearLayout>
+    </ScrollView>
+
 
 
 
