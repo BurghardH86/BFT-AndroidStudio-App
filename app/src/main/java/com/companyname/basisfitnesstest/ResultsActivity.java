@@ -122,7 +122,18 @@ public class ResultsActivity extends AppCompatActivity {
     }
 
     public void clickErgebnisTeilen(View view) {
+        sendMail();
 
+    }
 
+    private void sendMail() {
+
+        Intent mailSendIntent = new Intent(Intent.ACTION_SEND);
+        mailSendIntent.putExtra(Intent.EXTRA_EMAIL, "test@googlemail.com");
+        mailSendIntent.putExtra(Intent.EXTRA_SUBJECT, "Ergebnisse BFT, DATUM");
+        mailSendIntent.putExtra(Intent.EXTRA_TEXT, "Test Text");
+
+        mailSendIntent.setType("message/rfc822");
+        startActivity(Intent.createChooser(mailSendIntent, "Mail App wählen"));
     }
 }
