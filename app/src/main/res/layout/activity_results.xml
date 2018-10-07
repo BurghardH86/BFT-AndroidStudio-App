@@ -5,9 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ResultsActivity">
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp"
+        tools:ignore="MissingConstraints">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -37,7 +41,7 @@
                 android:gravity="center"
                 android:padding="8dp"
                 android:text="11 x 10 m Sprinttest"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/sprintTimeResultTextView"
@@ -74,7 +78,7 @@
                 android:gravity="center"
                 android:padding="8dp"
                 android:text="Klimmhang"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/klimmhangTimeResultTextView"
@@ -111,7 +115,7 @@
                 android:gravity="center"
                 android:padding="8dp"
                 android:text="1000-m-Lauf"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/laufTimeResultTextView"
@@ -146,7 +150,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:padding="12dp"
+                android:padding="8dp"
                 android:text="Gesamtbewertung"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -157,7 +161,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:padding="8dp"
+                android:padding="6dp"
                 android:text="Sehr Gut"
                 android:textStyle="bold" />
 
@@ -167,11 +171,23 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:padding="8dp"
+                android:padding="6dp"
                 android:text="Note 1.3"
                 android:textSize="18sp"
                 android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/teilenButton"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="6dp"
+                android:onClick="clickErgebnisTeilen"
+                android:text="Ergebnis teilen" />
+
         </LinearLayout>
     </ScrollView>
+
 
 </android.support.constraint.ConstraintLayout>

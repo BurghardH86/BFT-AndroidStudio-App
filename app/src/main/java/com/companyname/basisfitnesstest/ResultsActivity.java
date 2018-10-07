@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.Locale;
@@ -27,6 +29,8 @@ public class ResultsActivity extends AppCompatActivity {
     private TextView ratingTextView;
     private TextView gradeTextView;
 
+    private Button teilenButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +53,8 @@ public class ResultsActivity extends AppCompatActivity {
 
         this.ratingTextView = findViewById(R.id.ratingTextView);
         this.gradeTextView = findViewById(R.id.gradeTextView);
+
+        this.teilenButton = findViewById(R.id.teilenButton);
 
         setValues();
     }
@@ -113,5 +119,10 @@ public class ResultsActivity extends AppCompatActivity {
         {
             currentTextView.setBackgroundColor(Color.RED);
         }
+    }
+
+    public void clickErgebnisTeilen(View view) {
+
+
     }
 }
