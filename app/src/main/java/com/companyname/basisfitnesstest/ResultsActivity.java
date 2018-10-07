@@ -29,7 +29,19 @@ public class ResultsActivity extends AppCompatActivity {
     private TextView ratingTextView;
     private TextView gradeTextView;
 
-    private Button teilenButton;
+    String sprintTimeString;
+    String sprintPointsString;
+    String sprintGradeString;
+    String pullUpTimeString;
+    String pullUpPointsString;
+    String pullUpGradeString;
+    String runTimeString;
+    String runPointsString;
+    String runGradeString;
+    String ratingGrade;
+    String completeGrade;
+
+    private String resultsAsContentText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,40 +66,38 @@ public class ResultsActivity extends AppCompatActivity {
         this.ratingTextView = findViewById(R.id.ratingTextView);
         this.gradeTextView = findViewById(R.id.gradeTextView);
 
-        this.teilenButton = findViewById(R.id.teilenButton);
-
         setValues();
     }
 
     public void setValues()
     {
-        String sprintTimeString = "Zeit: " + String.valueOf(analysisOfInput.SprintTime) + " s";
+        sprintTimeString = "Zeit: " + String.valueOf(analysisOfInput.SprintTime) + " s";
         sprintTimeTextView.setText(sprintTimeString);
-        String sprintPointsString = String.valueOf(analysisOfInput.BerechneDisziplinpunkteSprint()) + " Punkte";
+        sprintPointsString = String.valueOf(analysisOfInput.BerechneDisziplinpunkteSprint()) + " Punkte";
         sprintPointsTextView.setText(sprintPointsString);
-        String sprintGradeString = "Note: " + String.format(Locale.GERMANY, "%.2f", analysisOfInput.NoteSprint()) + " (" + analysisOfInput.BewertungDerSprintpunkte() + ")";
+        sprintGradeString = "Note: " + String.format(Locale.GERMANY, "%.2f", analysisOfInput.NoteSprint()) + " (" + analysisOfInput.BewertungDerSprintpunkte() + ")";
         sprintGradeTextView.setText(sprintGradeString);
         setBackgroundColorToLabel(sprintGradeTextView, analysisOfInput.NoteSprint());
 
-        String pullUpTimeString = "Zeit: " + String.valueOf(analysisOfInput.KlimmhangTime) + " s";
+        pullUpTimeString = "Zeit: " + String.valueOf(analysisOfInput.KlimmhangTime) + " s";
         pullUpTimeTextView.setText(pullUpTimeString);
-        String pullUpPointsString = String.valueOf(analysisOfInput.BerechneDisziplinpunkteKlimmhang()) + " Punkte";
+        pullUpPointsString = String.valueOf(analysisOfInput.BerechneDisziplinpunkteKlimmhang()) + " Punkte";
         pullUpPointsTextView.setText(pullUpPointsString);
-        String pullUpGradeString = "Note: " + String.format(Locale.GERMANY, "%.2f", analysisOfInput.NoteKlimmhang()) + " (" + analysisOfInput.BewertungDerKlimmhangpunkte() + ")";
+        pullUpGradeString = "Note: " + String.format(Locale.GERMANY, "%.2f", analysisOfInput.NoteKlimmhang()) + " (" + analysisOfInput.BewertungDerKlimmhangpunkte() + ")";
         pullUpGradeTextView.setText(pullUpGradeString);
         setBackgroundColorToLabel(pullUpGradeTextView, analysisOfInput.NoteKlimmhang());
 
-        String runTimeString = "Zeit: " + String.valueOf(analysisOfInput.LaufTime) + " s";
+        runTimeString = "Zeit: " + String.valueOf(analysisOfInput.LaufTime) + " s";
         runTimeTextView.setText(runTimeString);
-        String runPointsString = String.valueOf(analysisOfInput.BerechneDisziplinpunkteLauf()) + " Punkte";
+        runPointsString = String.valueOf(analysisOfInput.BerechneDisziplinpunkteLauf()) + " Punkte";
         runPointsTextView.setText(runPointsString);
-        String runGradeString = "Note: " + String.format(Locale.GERMANY, "%.2f", analysisOfInput.NoteLauf()) + " (" + analysisOfInput.BewertungDerLaufpunkte() + ")";
+        runGradeString = "Note: " + String.format(Locale.GERMANY, "%.2f", analysisOfInput.NoteLauf()) + " (" + analysisOfInput.BewertungDerLaufpunkte() + ")";
         runGradeTextView.setText(runGradeString);
         setBackgroundColorToLabel(runGradeTextView, analysisOfInput.NoteLauf());
 
-
-        ratingTextView.setText(analysisOfInput.BewertungDerGesamtnote());
-        String completeGrade = "Note: " + String.format(Locale.GERMANY, "%.2f", analysisOfInput.Gesamtnote());
+        ratingGrade = String.valueOf(analysisOfInput.BewertungDerGesamtnote());
+        ratingTextView.setText(ratingGrade);
+        completeGrade = "Note: " + String.format(Locale.GERMANY, "%.2f", analysisOfInput.Gesamtnote());
         gradeTextView.setText(completeGrade);
         setBackgroundColorToLabel(gradeTextView, analysisOfInput.Gesamtnote());
 
@@ -122,18 +132,42 @@ public class ResultsActivity extends AppCompatActivity {
     }
 
     public void clickErgebnisTeilen(View view) {
+        getResultsAsTextContent();
         sendMail();
 
+    }
+
+    private void getResultsAsTextContent() {
+        resultsAsContentText = "Basis Fitness Test\n\n";
+        resultsAsContentText += "Ergebnis vom DATUM \n\n";
+
+        resultsAsContentText += "11 x 10 m Sprinttest\n";
+        resultsAsContentText += sprintTimeString + "\n";
+        resultsAsContentText += sprintPointsString + "\n";
+        resultsAsContentText += sprintGradeString + "\n\n";
+
+        resultsAsContentText += "Klimmhang\n";
+        resultsAsContentText += pullUpTimeString + "\n";
+        resultsAsContentText += pullUpPointsString + "\n";
+        resultsAsContentText += pullUpGradeString + "\n\n";
+
+        resultsAsContentText += "1000-m-Lauf\n";
+        resultsAsContentText += runTimeString + "\n";
+        resultsAsContentText += runPointsString + "\n";
+        resultsAsContentText += runGradeString + "\n\n";
+
+        resultsAsContentText += "Gesamtbewertung\n";
+        resultsAsContentText += completeGrade + "(" + ratingGrade + ")";
     }
 
     private void sendMail() {
 
         Intent mailSendIntent = new Intent(Intent.ACTION_SEND);
-        mailSendIntent.putExtra(Intent.EXTRA_EMAIL, "test@googlemail.com");
+        mailSendIntent.setType("text/plain");
         mailSendIntent.putExtra(Intent.EXTRA_SUBJECT, "Ergebnisse BFT, DATUM");
-        mailSendIntent.putExtra(Intent.EXTRA_TEXT, "Test Text");
+        mailSendIntent.putExtra(Intent.EXTRA_TEXT, resultsAsContentText);
 
         mailSendIntent.setType("message/rfc822");
-        startActivity(Intent.createChooser(mailSendIntent, "Mail App wählen"));
+        startActivity(Intent.createChooser(mailSendIntent, "App zum Teilen wählen"));
     }
 }
