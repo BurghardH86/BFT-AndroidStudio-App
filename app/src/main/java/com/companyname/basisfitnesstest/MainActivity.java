@@ -44,8 +44,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //TODO: A scrollbar for smaller resolutions
-
         genderTextView = findViewById(R.id.männlichWeiblichTextView);
         genderSwitch = findViewById(R.id.geschlechtSwitch);
         sprintEditText = findViewById(R.id.sprintEditText);
@@ -67,12 +65,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) {
-                    genderSwitchIsChecked = genderSwitch.isChecked();
+                    genderSwitchIsChecked = true;
                     genderTextView.setText(femaleString);  //To change the text near to switch
                     Log.d("You are :", "Checked");
                 }
                 else {
-                    genderSwitchIsChecked = !genderSwitch.isChecked();
+                    genderSwitchIsChecked = false;
                     genderTextView.setText(maleString);  //To change the text near to switch
                     Log.d("You are :", " Not Checked");
                 }

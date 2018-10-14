@@ -318,6 +318,29 @@ public class DataProcessingUnitTest {
     }
 
     @Test
+    public void DisziplinpunkteKlimmhang_45s_300Punkte()
+    {
+        //Arrange
+        DataProcessingModel Auswertung = new DataProcessingModel(false, 18, 35, 45, 170);
+        //Act
+        int result = Auswertung.BerechneDisziplinpunkteKlimmhang();
+        //Assert
+        Assert.assertEquals(300, result);
+    }
+
+    @Test
+    public void NoteDisziplinpunkteKlimmhang_45s_1Punkt00()
+    {
+        //Arrange
+        DataProcessingModel Auswertung = new DataProcessingModel(false, 18, 35, 45, 170);
+        //Act
+        double result = Auswertung.NoteKlimmhang();
+        //Assert
+        Assert.assertEquals(2.49, result, 0.001);
+    }
+
+
+    @Test
     public void BerechnungDerNote_225Punkte_Result()
     {
         //Arrange

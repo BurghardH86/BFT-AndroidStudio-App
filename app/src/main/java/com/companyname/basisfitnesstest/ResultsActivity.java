@@ -167,7 +167,7 @@ public class ResultsActivity extends AppCompatActivity {
         mailSendIntent.putExtra(Intent.EXTRA_SUBJECT, "Ergebnisse BFT, DATUM");
         mailSendIntent.putExtra(Intent.EXTRA_TEXT, resultsAsContentText);
 
-        mailSendIntent.setType("message/rfc822");
+        //mailSendIntent.setType("message/rfc822");
         startActivity(Intent.createChooser(mailSendIntent, "App zum Teilen wählen"));
     }
 }
